@@ -8,8 +8,11 @@ class Post(models.Model):
     created = models.DateTimeField(verbose_name="Sukurimo data", auto_now_add=True)
     user = models.ForeignKey(to=User, verbose_name="Vartotojas", on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return f"{self.user} {self.title} {self.created}"
+
 class Comment(models.Model):
     content = models.TextField(verbose_name="Tekstas", max_length=1000)
     created = models.DateTimeField(verbose_name="Sukurimo dataa", auto_now_add=True)
-    post = models.ForeignKey(to="Post", verbose_name="Irasas", on_delete=models.CASCADE, related_name="comments")
+    post = models.ForeignKey(to="Post", verbose_name="Irasas", on_delete=models.CASCADE, related_name="conts")
     user = models.ForeignKey(to=User, verbose_name="Vartotojas", on_delete=models.SET_NULL, null=True)
